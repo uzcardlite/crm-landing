@@ -37,6 +37,37 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Sora", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      keyframes: {
+        blobfloat: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(20px, -16px) scale(1.06)" },
+          "66%": { transform: "translate(-14px, 12px) scale(0.95)" },
+        },
+        chatbob: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        pulsering: {
+          "0%": { transform: "scale(0.6)", opacity: "0.5" },
+          "100%": { transform: "scale(1.8)", opacity: "0" },
+        },
+        tabprogress: {
+          from: { width: "0%" },
+          to: { width: "100%" },
+        },
+      },
+      animation: {
+        blobfloat: "blobfloat 16s ease-in-out infinite",
+        chatbob: "chatbob 5s ease-in-out infinite",
+        marquee: "marquee 30s linear infinite",
+        pulsering: "pulsering 1.8s infinite",
+        tabprogress: "tabprogress 6s linear forwards",
       },
     },
   },

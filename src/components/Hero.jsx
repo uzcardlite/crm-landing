@@ -12,15 +12,15 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden bg-navy-900 pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-accent/25 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[480px] w-[480px] -translate-x-1/2 animate-blobfloat rounded-full bg-accent/25 blur-[120px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 top-24 h-[300px] w-[300px] rounded-full bg-sky-400/10 blur-[100px]"
+        className="pointer-events-none absolute -right-20 top-24 h-[300px] w-[300px] animate-blobfloat rounded-full bg-sky-400/10 blur-[100px] [animation-delay:-6s]"
       />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
             O'quv markazingiz uchun{" "}
             <span className="text-accent">AI bilan boshqariladigan</span> tizim
           </h1>

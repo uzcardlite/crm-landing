@@ -1,11 +1,10 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Pillars from "./components/Pillars";
-import SectionAttendance from "./components/SectionAttendance";
-import SectionPayments from "./components/SectionPayments";
+import FeatureGrid from "./components/FeatureGrid";
+import Solutions from "./components/Solutions";
 import SectionDashboard from "./components/SectionDashboard";
 import SectionParents from "./components/SectionParents";
-import SectionAI from "./components/SectionAI";
+import AISpotlight from "./components/AISpotlight";
 import Integrations from "./components/Integrations";
 import Partners from "./components/Partners";
 import TrustSignal from "./components/TrustSignal";
@@ -14,17 +13,22 @@ import Footer from "./components/Footer";
 
 // Pricing is deliberately not on the site — deals are discussed per centre,
 // not published as a fixed table. See src/components/Pricing.jsx (unused).
+//
+// Solutions.jsx (tabbed Davomat/Moliya/AI phone mockups) replaces the old
+// SectionAttendance + SectionPayments + SectionAI trio — same content, one
+// interactive block instead of three long scroll sections. Dashboard and
+// Parents stay as their own sections: real product depth the mockup never
+// covered, worth keeping even though it wasn't in the reference design.
 export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <Nav />
       <Hero />
-      <Pillars />
-      <SectionAttendance />
-      <SectionPayments />
+      <FeatureGrid />
+      <Solutions />
       <SectionDashboard />
       <SectionParents />
-      <SectionAI />
+      <AISpotlight />
       <Integrations />
       <Partners />
       <TrustSignal />
