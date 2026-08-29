@@ -5,11 +5,13 @@ import SectionAttendance from "./components/SectionAttendance";
 import SectionPayments from "./components/SectionPayments";
 import SectionDashboard from "./components/SectionDashboard";
 import SectionParents from "./components/SectionParents";
+import Partners from "./components/Partners";
 import TrustSignal from "./components/TrustSignal";
-import Pricing from "./components/Pricing";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 
+// Pricing is deliberately not on the site — deals are discussed per centre,
+// not published as a fixed table. See src/components/Pricing.jsx (unused).
 export default function App() {
   return (
     <div className="min-h-screen bg-white">
@@ -20,8 +22,8 @@ export default function App() {
       <SectionPayments />
       <SectionDashboard />
       <SectionParents />
+      <Partners />
       <TrustSignal />
-      <Pricing />
       <FinalCTA />
       <Footer />
     </div>

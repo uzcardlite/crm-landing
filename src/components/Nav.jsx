@@ -4,9 +4,12 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy-900/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="ncrm" className="h-8 w-8 rounded-btn" />
-          <span className="text-lg font-semibold text-white">ncrm</span>
+        <a
+          href="#top"
+          className="flex items-center gap-2.5 rounded-btn p-1 transition-transform hover:scale-[1.03]"
+        >
+          <img src="/logo.svg" alt="ncrm" className="h-10 w-10 rounded-btn" />
+          <span className="text-xl font-bold text-white">ncrm</span>
         </a>
         <div className="flex items-center gap-3 sm:gap-5">
           <a

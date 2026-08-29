@@ -1,4 +1,4 @@
-import { LOGIN_URL, TELEGRAM_USERNAME } from "../config";
+import { CONTACT_PHONE, CONTACT_PHONE_TEL, LOGIN_URL, TELEGRAM_USERNAME } from "../config";
 
 export default function Footer() {
   return (
@@ -13,8 +13,8 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-6 text-sm">
-          <a href="#narxlar" className="text-navy-text hover:text-white">
-            Narxlar
+          <a href={`tel:${CONTACT_PHONE_TEL}`} className="text-navy-text hover:text-white">
+            {CONTACT_PHONE}
           </a>
           <a href={LOGIN_URL} className="text-navy-text hover:text-white">
             Kirish
