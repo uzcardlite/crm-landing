@@ -1,32 +1,71 @@
-import { CONTACT_PHONE, CONTACT_PHONE_TEL, LOGIN_URL, TELEGRAM_USERNAME } from "../config";
+import { CONTACT_PHONE, CONTACT_PHONE_TEL, TELEGRAM_USERNAME } from "../config";
+import { useLeadModal } from "../context/LeadModalContext";
 
 export default function Footer() {
+  const { openLead } = useLeadModal();
+
   return (
-    <footer className="bg-navy-900 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 sm:flex-row sm:justify-between sm:px-6">
-        <div className="flex items-center gap-2">
-          <img src="/logo.svg" alt="ncrm" className="h-7 w-7 rounded-btn" />
+    <footer>
+      <div className="wrap">
+        <div className="foot-grid">
           <div>
-            <div className="text-sm font-semibold text-white">ncrm</div>
-            <div className="text-xs text-navy-text">O'quv markazlar uchun CRM</div>
+            <div className="brand" style={{ marginBottom: 12 }}>
+              <div className="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                  <path d="M12 2l1.8 6.1L20 10l-6.2 1.9L12 18l-1.8-6.1L4 10l6.2-1.9L12 2z" />
+                </svg>
+              </div>
+              ncrm
+            </div>
+            <p style={{ color: "var(--muted)", fontSize: 13.5, lineHeight: 1.6, maxWidth: "34ch" }}>
+              O'zbek o'quv markazlari uchun AI bilan boshqariladigan boshqaruv tizimi.
+            </p>
+          </div>
+          <div>
+            <h6>Tizim</h6>
+            <ul>
+              <li>
+                <a href="#features">Imkoniyatlar</a>
+              </li>
+              <li>
+                <a href="#ai">AI</a>
+              </li>
+              <li>
+                <a href="#integrations">Integratsiyalar</a>
+              </li>
+              <li>
+                <a href="#faq">Savollar</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h6>Bog'lanish</h6>
+            <ul>
+              <li>
+                <a href={`https://t.me/${TELEGRAM_USERNAME}`} target="_blank" rel="noopener noreferrer">
+                  Telegram
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${CONTACT_PHONE_TEL}`}>{CONTACT_PHONE}</a>
+              </li>
+              <li>
+                <a
+                  href="#cta"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openLead();
+                  }}
+                >
+                  Bepul konsultatsiya
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-
-        <div className="flex items-center gap-6 text-sm">
-          <a href={`tel:${CONTACT_PHONE_TEL}`} className="text-navy-text hover:text-white">
-            {CONTACT_PHONE}
-          </a>
-          <a href={LOGIN_URL} className="text-navy-text hover:text-white">
-            Kirish
-          </a>
-          <a
-            href={`https://t.me/${TELEGRAM_USERNAME}`}
-            className="text-navy-text hover:text-white"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Telegram
-          </a>
+        <div className="foot-bottom">
+          <span>© 2026 ncrm. Barcha huquqlar himoyalangan.</span>
+          <span>Maxfiylik kelishuvi · Foydalanish shartlari</span>
         </div>
       </div>
     </footer>

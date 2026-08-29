@@ -1,227 +1,279 @@
-import { useEffect, useState } from "react";
-import { Calendar, Check, Clock, Sparkles, Wallet, X } from "lucide-react";
-import PhoneMock from "./ui/PhoneMock";
-import { useInView } from "../hooks/useInView";
+import { useEffect, useRef, useState } from "react";
+import Reveal from "./ui/Reveal";
 
-const TABS = [
-  {
-    key: "davomat",
-    label: "Davomat",
-    eyebrow: "Ustoz ilovasi orqali",
-    title: "Bir bosishda, ota-onaga darhol xabar",
-    text: "O'qituvchi telefonidagi ilovada guruhni ochadi va har bir o'quvchi qatorida \"Keldi / Kelmadi / Kechikdi\"ni bosadi. Dars kelmagan o'quvchining ota-onasiga Telegram orqali xabar shu zahoti yetib boradi.",
-    checks: ["Bir bosishda belgilash", "Avtomatik Telegram xabar", "Oylik davomat hisoboti"],
-    phoneIcon: Calendar,
-    phoneTitle: "Ingliz tili · 9-guruh",
-    phoneSubtitle: "Bugun, 18:00",
-    rows: [
-      { name: "Davronbek Shakarov", initials: "DS", color: "#B9740F", status: "ok", label: "Keldi" },
-      { name: "Dilshoda Zokirova", initials: "DZ", color: "#3D5FB0", status: "ok", label: "Keldi" },
-      { name: "Sardor Rahimov", initials: "SR", color: "#3D8A5E", status: "warn", label: "Kechikdi" },
-      { name: "Aziza Karimova", initials: "AK", color: "#B0598A", status: "bad", label: "Kelmadi" },
-    ],
-  },
-  {
-    key: "moliya",
-    label: "Moliya",
-    eyebrow: "To'lovlar va qarzdorlik",
-    title: "Kim to'lagan, kim qarzdor — bir qarashda",
-    text: "Har bir to'lov, xarajat va oylik hisob-kitob bitta joyda. Qarzdorlik oyma-oy avtomatik hisoblanadi, ota-onalar esa o'z farzandining to'lov holatini o'zi kuzatadi.",
-    checks: ["Avtomatik qarzdorlik hisobi", "Ota-ona o'z holatini ko'radi", "Excel hisobot bir bosishda"],
-    phoneIcon: Wallet,
-    phoneTitle: "Moliya",
-    phoneSubtitle: "Avgust 2026",
-    summary: { label: "Jami tushum (oy)", value: "18,4 mln", trend: "+12%" },
-    rows: [
-      { name: "Dilnoza Muhitdinova", initials: "DM", color: "#C4432B", sub: "2 oydan beri", amount: "2 400 000" },
-      { name: "Sardor Rahimov", initials: "SR", color: "#B9740F", sub: "1 oydan beri", amount: "2 100 000" },
-    ],
-  },
-  {
-    key: "ai",
-    label: "AI Tahlil",
-    eyebrow: "Sun'iy intellekt",
-    title: "Bazangiz bilan tabiiy tilda gaplashing",
-    text: "\"Shu oy eng ko'p qarzi bor 10 ta ota-onani ko'rsat\" yoki \"Bugun kim darsga kelmadi?\" deb yozing — AI bazangizdan real ma'lumotni topib, tushunarli javob qaytaradi.",
-    checks: ["Tabiiy tildagi savollar", "Maskalangan, xavfsiz ma'lumot", "Jadval va grafik bilan javob"],
-    phoneIcon: Sparkles,
-    phoneTitle: "AI Tahlil",
-    phoneSubtitle: "Bazangizga ulangan",
-    chat: [
-      { from: "user", text: "Bugun kim kelmadi?" },
-      { from: "ai", text: "Bugun 3 ta o'quvchi darsga kelmagan: Aziza K., Jasur T., Nilufar Y." },
-      { from: "user", text: "Ularga eslatma yubor" },
-      { from: "ai", typing: true },
-    ],
-  },
-];
+const StatusIcons = () => (
+  <span className="icons">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M2 17h2v4H2zM7 13h2v8H7zM12 9h2v12h-2zM17 5h2v16h-2z" />
+    </svg>
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <rect x="2" y="7" width="18" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      <rect x="4" y="9" width="12" height="6" rx="1" />
+      <rect x="21" y="10" width="1.5" height="4" rx=".5" />
+    </svg>
+  </span>
+);
 
-const STATUS_STYLE = {
-  ok: { bg: "bg-success-bg", text: "text-success", icon: Check },
-  warn: { bg: "bg-accent-light/60", text: "text-accent-dark", icon: Clock },
-  bad: { bg: "bg-danger-bg", text: "text-danger", icon: X },
-};
+const PhoneStatus = () => (
+  <div className="phone-status">
+    <span>09:41</span>
+    <StatusIcons />
+  </div>
+);
 
-function Avatar({ initials, color }) {
+function AttendancePhone() {
   return (
-    <span
-      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
-      style={{ backgroundColor: color }}
-    >
-      {initials}
-    </span>
-  );
-}
-
-function PhoneScreen({ tab }) {
-  if (tab.key === "davomat") {
-    return (
-      <div className="flex flex-col gap-1">
-        {tab.rows.map((row) => {
-          const style = STATUS_STYLE[row.status];
-          const StatusIcon = style.icon;
-          return (
-            <div key={row.name} className="flex items-center gap-2.5 rounded-btn px-1.5 py-2">
-              <Avatar initials={row.initials} color={row.color} />
-              <span className="flex-1 truncate text-[12.5px] font-semibold text-gray-900">{row.name}</span>
-              <span className={`flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-bold ${style.bg} ${style.text}`}>
-                <StatusIcon size={10} />
-                {row.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
-  if (tab.key === "moliya") {
-    return (
-      <div className="flex flex-col gap-2">
-        <div className="flex items-end justify-between rounded-btn bg-gradient-to-br from-accent to-accent-dark p-3.5 text-accent-dark">
+    <div className="phone">
+      <div className="phone-notch" />
+      <div className="phone-screen">
+        <PhoneStatus />
+        <div className="phone-app-header">
+          <div className="app-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+          </div>
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-wide opacity-75">{tab.summary.label}</div>
-            <div className="mt-0.5 text-[21px] font-extrabold">{tab.summary.value}</div>
+            <div className="title">Ingliz tili · 9-guruh</div>
+            <div className="sub">Bugun, 18:00</div>
           </div>
-          <span className="rounded-full bg-white/35 px-2 py-0.5 text-[10.5px] font-bold">{tab.summary.trend}</span>
         </div>
-        <div className="px-1 text-[10px] font-bold uppercase tracking-wide text-gray-400">Bu oy qarzdorlar</div>
-        {tab.rows.map((row) => (
-          <div key={row.name} className="flex items-center gap-2.5 rounded-btn px-1.5 py-1.5">
-            <Avatar initials={row.initials} color={row.color} />
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-[12.5px] font-semibold text-gray-900">{row.name}</div>
-              <div className="text-[10px] text-gray-400">{row.sub}</div>
-            </div>
-            <span className="flex-shrink-0 text-[12.5px] font-extrabold text-gray-900">{row.amount}</span>
+        <div className="phone-body">
+          <div className="plist">
+            {[
+              { initials: "DS", color: "#B9740F", name: "Davronbek Shakarov", pill: "✓ Keldi", bg: "var(--good-bg)", fg: "var(--good)" },
+              { initials: "DZ", color: "#5B6FB0", name: "Dilshoda Zokirova", pill: "✓ Keldi", bg: "var(--good-bg)", fg: "var(--good)" },
+              { initials: "SR", color: "#4B8A63", name: "Sardor Rahimov", pill: "⏱ Kechikdi", bg: "var(--accent-light)", fg: "var(--accent-ink)" },
+              { initials: "AK", color: "#B0598A", name: "Aziza Karimova", pill: "✕ Kelmadi", bg: "#FCEBEB", fg: "#A32D2D" },
+            ].map((row) => (
+              <div className="plist-row" key={row.name}>
+                <div className="plist-avatar" style={{ background: row.color }}>
+                  {row.initials}
+                </div>
+                <div className="plist-body">
+                  <div className="plist-name">{row.name}</div>
+                </div>
+                <span className="plist-pill" style={{ background: row.bg, color: row.fg }}>
+                  {row.pill}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        <div className="phone-home" />
       </div>
-    );
-  }
-
-  return (
-    <div className="flex flex-col gap-2.5">
-      {tab.chat.map((msg, i) =>
-        msg.from === "user" ? (
-          <div key={i} className="ml-auto max-w-[84%] rounded-2xl rounded-tr-sm bg-accent px-3.5 py-2 text-[12px] font-semibold text-accent-dark">
-            {msg.text}
-          </div>
-        ) : (
-          <div key={i} className="flex max-w-[94%] items-start gap-2">
-            <span className="mt-0.5 flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center rounded-btn bg-gradient-to-br from-accent to-accent-dark">
-              <Sparkles size={11} className="text-accent-dark" />
-            </span>
-            {msg.typing ? (
-              <span className="flex items-center gap-1 rounded-2xl rounded-tl-sm bg-gray-100 px-3.5 py-3">
-                {[0, 1, 2].map((d) => (
-                  <span
-                    key={d}
-                    className="h-[5px] w-[5px] animate-bounce rounded-full bg-gray-400"
-                    style={{ animationDelay: `${d * 0.15}s` }}
-                  />
-                ))}
-              </span>
-            ) : (
-              <span className="rounded-2xl rounded-tl-sm bg-gray-100 px-3.5 py-2 text-[11.5px] leading-snug text-gray-700">
-                {msg.text}
-              </span>
-            )}
-          </div>
-        ),
-      )}
     </div>
   );
 }
 
+function FinancePhone() {
+  return (
+    <div className="phone">
+      <div className="phone-notch" />
+      <div className="phone-screen">
+        <PhoneStatus />
+        <div className="phone-app-header">
+          <div className="app-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg>
+          </div>
+          <div>
+            <div className="title">Moliya</div>
+            <div className="sub">Avgust 2026</div>
+          </div>
+        </div>
+        <div className="phone-body">
+          <div className="finance-summary">
+            <div>
+              <div className="lbl">Jami tushum (oy)</div>
+              <div className="val">18,4 mln</div>
+            </div>
+            <span className="trend">+12%</span>
+          </div>
+          <div className="plist-section-label">Bu oy qarzdorlar</div>
+          <div className="plist">
+            {[
+              { initials: "DM", color: "#C4432B", name: "Dilnoza Muhitdinova", sub: "2 oydan beri", amount: "2 400 000" },
+              { initials: "SR", color: "#B9740F", name: "Sardor Rahimov", sub: "1 oydan beri", amount: "2 100 000" },
+            ].map((row) => (
+              <div className="plist-row" key={row.name}>
+                <div className="plist-avatar" style={{ background: row.color }}>
+                  {row.initials}
+                </div>
+                <div className="plist-body">
+                  <div className="plist-name">{row.name}</div>
+                  <div className="plist-sub">{row.sub}</div>
+                </div>
+                <span className="plist-amount">{row.amount}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="phone-home" />
+      </div>
+    </div>
+  );
+}
+
+function AIPhone() {
+  return (
+    <div className="phone">
+      <div className="phone-notch" />
+      <div className="phone-screen">
+        <PhoneStatus />
+        <div className="phone-app-header">
+          <div className="app-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M12 2l1.8 6.1L20 10l-6.2 1.9L12 18l-1.8-6.1L4 10l6.2-1.9L12 2z" />
+            </svg>
+          </div>
+          <div>
+            <div className="title">AI Tahlil</div>
+            <div className="sub">Bazangizga ulangan</div>
+          </div>
+        </div>
+        <div className="phone-body">
+          <div className="pchat">
+            <div className="pchat-u">Bugun kim kelmadi?</div>
+            <div className="pchat-a">
+              <div className="pchat-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M12 2l1.8 6.1L20 10l-6.2 1.9L12 18l-1.8-6.1L4 10l6.2-1.9L12 2z" />
+                </svg>
+              </div>
+              <div className="pchat-text">
+                Bugun <b>3 ta</b> o'quvchi darsga kelmagan: <b>Aziza K.</b>, Jasur T., Nilufar Y.
+              </div>
+            </div>
+            <div className="pchat-u">Ularga eslatma yubor</div>
+            <div className="pchat-a">
+              <div className="pchat-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M12 2l1.8 6.1L20 10l-6.2 1.9L12 18l-1.8-6.1L4 10l6.2-1.9L12 2z" />
+                </svg>
+              </div>
+              <div className="pchat-text">
+                <span className="pchat-typing">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="phone-home" />
+      </div>
+    </div>
+  );
+}
+
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <path d="M20 6L9 17l-5-5" />
+  </svg>
+);
+
+const TABS = [
+  {
+    label: "Davomat",
+    eyebrow: "Ustoz ilovasi orqali",
+    title: "Davomat — bir bosishda, ota-onaga darhol xabar",
+    text: "O'qituvchi telefonidagi ilovada guruhni ochadi va har bir o'quvchi qatorida \"Keldi / Kelmadi / Kechikdi\"ni bosadi. Dars kelmagan o'quvchining ota-onasiga Telegram orqali xabar shu zahoti yetib boradi — kassaga yoki administratorga qo'ng'iroq qilish shart emas.",
+    checks: ["Bir bosishda belgilash", "Avtomatik Telegram xabar", "Oylik davomat hisoboti"],
+    Phone: AttendancePhone,
+  },
+  {
+    label: "Moliya",
+    eyebrow: "To'lovlar va qarzdorlik",
+    title: "Moliya — kim to'lagan, kim qarzdor, bir qarashda",
+    text: "Har bir to'lov, xarajat va oylik hisob-kitob bitta joyda. Qarzdorlik oyma-oy avtomatik hisoblanadi, ota-onalar esa Farzandim ilovasida o'z farzandining to'lov holatini o'zi kuzatadi — qo'ng'iroq qilib so'rashning hojati qolmaydi.",
+    checks: ["Avtomatik qarzdorlik hisobi", "Ota-ona o'z holatini ko'radi", "Excel hisobot bir bosishda"],
+    Phone: FinancePhone,
+  },
+  {
+    label: "AI Tahlil",
+    eyebrow: "Sun'iy intellekt",
+    title: "AI Tahlil — bazangiz bilan tabiiy tilda gaplashing",
+    text: "\"Shu oy eng ko'p qarzi bor 10 ta ota-onani ko'rsat\" yoki \"Bugun kim darsga kelmadi?\" deb yozing — AI bazangizdan real ma'lumotni topib, tushunarli javob va jadval bilan qaytaradi. Alohida hisobot yaratishga vaqt sarflash shart emas.",
+    checks: ["Tabiiy tildagi savollar", "Maskalangan, xavfsiz ma'lumot", "Jadval va grafik bilan javob"],
+    Phone: AIPhone,
+  },
+];
+
+const AUTO_ADVANCE_MS = 6000;
+
 export default function Solutions() {
   const [active, setActive] = useState(0);
-  const [ref, inView] = useInView();
+  const [runKey, setRunKey] = useState(0);
+  const timerRef = useRef(null);
+
+  function activate(index) {
+    setActive(index);
+    setRunKey((k) => k + 1);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => activate((index + 1) % TABS.length), AUTO_ADVANCE_MS);
+  }
 
   useEffect(() => {
-    const timer = setInterval(() => setActive((i) => (i + 1) % TABS.length), 6000);
-    return () => clearInterval(timer);
+    timerRef.current = setTimeout(() => activate((active + 1) % TABS.length), AUTO_ADVANCE_MS);
+    return () => clearTimeout(timerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const tab = TABS[active];
-
   return (
-    <section ref={ref} className="border-b border-gray-100 bg-white py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div
-          className={`text-center transition-all duration-700 ease-out ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-        >
-          <div className="text-sm font-semibold text-accent-dark">Har kunlik ish</div>
-          <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+    <section id="solutions">
+      <div className="wrap">
+        <div className="center" style={{ marginBottom: 34 }}>
+          <div className="eyebrow">Har kunlik ish</div>
+          <Reveal as="h2" className="section-title">
             Markazingizning eng ko'p vaqt yeydigan ishlari
-          </h2>
+          </Reveal>
+          <Reveal as="p" className="section-sub">
+            Uchtasini tanladik — davomat, moliya va AI tahlil. Qolgan hammasi ham xuddi shunday avtomatlashtirilgan.
+          </Reveal>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
-          {TABS.map((t, i) => (
+        <div className="tabs-row">
+          {TABS.map((tab, i) => (
             <button
-              key={t.key}
+              key={tab.title}
               type="button"
-              onClick={() => setActive(i)}
-              className={`relative overflow-hidden rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors ${
-                i === active
-                  ? "border-navy-900 bg-navy-900 text-white"
-                  : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
-              }`}
+              className={`tab-btn${active === i ? " active" : ""}`}
+              onClick={() => activate(i)}
             >
-              {t.label}
-              {i === active && (
-                <span className="absolute bottom-0 left-0 h-[2.5px] animate-tabprogress bg-accent" />
-              )}
+              <span className="n">{String(i + 1).padStart(2, "0")}</span>
+              {tab.label}
+              <span className={`progress${active === i ? " run" : ""}`} key={active === i ? runKey : "idle"} />
             </button>
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 items-center gap-10 rounded-card border border-gray-100 bg-background p-6 shadow-card sm:p-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-accent-dark">{tab.eyebrow}</div>
-            <h3 className="mt-2 text-xl font-bold text-gray-900 sm:text-2xl">{tab.title}</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-gray-500">{tab.text}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {tab.checks.map((c) => (
-                <span
-                  key={c}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-success-bg px-3 py-1.5 text-xs font-semibold text-success"
-                >
-                  <Check size={12} />
-                  {c}
-                </span>
-              ))}
+        {TABS.map((tab, i) => {
+          const Phone = tab.Phone;
+          return (
+            <div className={`tab-panel${active === i ? " active" : ""}`} key={tab.title}>
+              <div>
+                <div className="tab-eyebrow">{tab.eyebrow}</div>
+                <h3>{tab.title}</h3>
+                <p>{tab.text}</p>
+                <div className="tab-checks">
+                  {tab.checks.map((check) => (
+                    <span className="tab-check" key={check}>
+                      <CheckIcon />
+                      {check}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="tab-visual">
+                <Phone />
+              </div>
             </div>
-          </div>
-          <div>
-            <PhoneMock icon={tab.phoneIcon} title={tab.phoneTitle} subtitle={tab.phoneSubtitle}>
-              <PhoneScreen tab={tab} />
-            </PhoneMock>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   );
