@@ -11,9 +11,7 @@ export default function Footer() {
           <div>
             <div className="brand" style={{ marginBottom: 12 }}>
               <div className="brand-mark">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                  <path d="M12 2l1.8 6.1L20 10l-6.2 1.9L12 18l-1.8-6.1L4 10l6.2-1.9L12 2z" />
-                </svg>
+                <img src="/logo.svg" alt="" />
               </div>
               ncrm
             </div>
