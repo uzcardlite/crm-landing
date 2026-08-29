@@ -1,4 +1,5 @@
 import { Layers, Send, Zap } from "lucide-react";
+import { useInView } from "../hooks/useInView";
 
 const items = [
   {
@@ -19,11 +20,19 @@ const items = [
 ];
 
 export default function Pillars() {
+  const [ref, inView] = useInView();
+
   return (
-    <section className="border-b border-gray-100 bg-white py-16 sm:py-20">
+    <section ref={ref} className="border-b border-gray-100 bg-white py-16 sm:py-20">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 sm:grid-cols-3 sm:px-6">
-        {items.map(({ icon: Icon, title, text }) => (
-          <div key={title}>
+        {items.map(({ icon: Icon, title, text }, i) => (
+          <div
+            key={title}
+            style={{ transitionDelay: `${i * 90}ms` }}
+            className={`transition-all duration-700 ease-out ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+          >
             <div className="flex h-10 w-10 items-center justify-center rounded-btn bg-accent-light/30 text-accent-dark">
               <Icon size={20} />
             </div>

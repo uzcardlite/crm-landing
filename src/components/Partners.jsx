@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
+import { useInView } from "../hooks/useInView";
 
 // Real, opted-in tenants only — a superadmin turns this on per-centre from
 // the Tenants panel once a logo is uploaded. Renders nothing while the list
 // is empty rather than showing a placeholder row.
 export default function Partners() {
   const [partners, setPartners] = useState([]);
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     let alive = true;
@@ -21,8 +23,12 @@ export default function Partners() {
   if (partners.length === 0) return null;
 
   return (
-    <section className="bg-white py-14">
-      <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+    <section ref={ref} className="bg-white py-14">
+      <div
+        className={`mx-auto max-w-5xl px-4 text-center transition-all duration-700 ease-out sm:px-6 ${
+          inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+        }`}
+      >
         <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
           Bizga ishonib ishlayotgan o'quv markazlar
         </p>
