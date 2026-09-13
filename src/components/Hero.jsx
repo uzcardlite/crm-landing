@@ -17,8 +17,8 @@ export default function Hero() {
         </h1>
         <p className="lead">
           Qo'lda yuritiladigan jadvallar, yo'qolgan to'lovlar va tarqoq Excel fayllarni unuting.
-          ncrm davomat, moliya, marketing va hisobotlarni avtomatlashtiradi — sun'iy intellekt esa
-          savollaringizga javob berib, bannerlaringizni chizib beradi.
+          Milliy CRM davomat, moliya, marketing va hisobotlarni avtomatlashtiradi — sun'iy intellekt
+          esa savollaringizga javob berib, bannerlaringizni chizib beradi.
         </p>
         <div className="hero-ctas">
           <a

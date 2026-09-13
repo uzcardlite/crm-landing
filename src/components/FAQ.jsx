@@ -3,7 +3,7 @@ import Reveal from "./ui/Reveal";
 
 const FAQS = [
   {
-    q: "ncrm'ni markazimizga o'rnatish qancha vaqt oladi?",
+    q: "Milliy CRM'ni markazimizga o'rnatish qancha vaqt oladi?",
     a: "O'quvchilar, o'qituvchilar va guruhlar ma'lumotlarini bizning jamoamiz tekinga ko'chirib beradi. Odatda 24–48 soat ichida tayyor holatda ishga tushasiz.",
   },
   {

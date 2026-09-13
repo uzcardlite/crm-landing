@@ -81,14 +81,14 @@ export default function Integrations() {
             Allaqachon ulangan xizmatlar
           </Reveal>
           <Reveal as="p" className="section-sub">
-            Xabar yuborishdan sun'iy intellektgacha — ncrm yadrosi bilan tayyor holda ishlaydi.
+            Xabar yuborishdan sun'iy intellektgacha — Milliy CRM yadrosi bilan tayyor holda ishlaydi.
           </Reveal>
         </div>
         <Reveal as="div" className="integ-hub">
           <span className="integ-hub-line" />
           <span className="integ-hub-node">
             <span className="dot2" />
-            ncrm yadrosi
+            Milliy CRM yadrosi
           </span>
           <span className="integ-hub-line r" />
         </Reveal>

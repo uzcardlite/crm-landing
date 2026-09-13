@@ -13,7 +13,7 @@ function isPlausiblePhone(value) {
 
 function openTelegramFallback({ ism, telefon, markaz }) {
   const message = [
-    "Yangi murojaat (ncrm landing):",
+    "Yangi murojaat (Milliy CRM landing):",
     `Ism: ${ism}`,
     `Telefon: ${telefon}`,
     `O'quv markazi: ${markaz}`,

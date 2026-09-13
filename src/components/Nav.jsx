@@ -43,7 +43,7 @@ export default function Nav() {
           <div className="brand-mark">
             <img src="/logo.svg" alt="" />
           </div>
-          ncrm
+          Milliy CRM
         </button>
         <div className="nav-links">
           <a href="#features">Imkoniyatlar</a>

@@ -13,7 +13,7 @@ export default function Footer() {
               <div className="brand-mark">
                 <img src="/logo.svg" alt="" />
               </div>
-              ncrm
+              Milliy CRM
             </div>
             <p style={{ color: "var(--muted)", fontSize: 13.5, lineHeight: 1.6, maxWidth: "34ch" }}>
               O'zbek o'quv markazlari uchun AI bilan boshqariladigan boshqaruv tizimi.
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© 2026 ncrm. Barcha huquqlar himoyalangan.</span>
+          <span>© 2026 Milliy CRM. Barcha huquqlar himoyalangan.</span>
           <span>Maxfiylik kelishuvi · Foydalanish shartlari</span>
         </div>
       </div>

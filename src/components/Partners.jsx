@@ -30,7 +30,7 @@ export default function Partners() {
     <section id="partners" style={{ paddingTop: 36, paddingBottom: 36 }}>
       <div className="wrap">
         <Reveal as="p" className="partners-caption">
-          ncrm orqali dars jarayonlarini boshqarayotgan <b>o'quv markazlar</b>
+          Milliy CRM orqali dars jarayonlarini boshqarayotgan <b>o'quv markazlar</b>
         </Reveal>
         {useMarquee ? (
           <div className="partners-marquee">
