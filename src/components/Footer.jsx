@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="brand" style={{ marginBottom: 12 }}>
               <div className="brand-mark">
-                <img src="/logo.svg" alt="" />
+                <img src="/logo.png" alt="" />
               </div>
               Milliy CRM
             </div>

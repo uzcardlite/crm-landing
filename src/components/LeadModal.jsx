@@ -136,7 +136,7 @@ export default function LeadModal() {
           <div className="blob lb2" />
           <div className="lead-side-content">
             <div className="mark">
-              <img src="/logo.svg" alt="" />
+              <img src="/logo.png" alt="" />
             </div>
             <h3>Tizimlashtirilgan o'quv markaziga bir necha qadam qoldi</h3>
             <p className="sub">7 kun bepul — karta raqami shart emas. Jamoamiz o'zi ulab, sozlab beradi.</p>

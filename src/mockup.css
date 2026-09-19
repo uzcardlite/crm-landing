@@ -111,12 +111,14 @@
 .mcrm .nav-inner { max-width: 1180px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 28px; }
 .mcrm .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; flex-shrink: 0; color: var(--ink); }
 .mcrm .brand-mark {
-  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
-  background: linear-gradient(155deg, var(--accent), var(--accent-dark));
-  display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px -4px rgba(226,147,43,.6);
+  /* The logo image is a self-contained mark (its own colour, shape and
+     padding) — no background/shadow box behind it, unlike the old flat
+     SVG glyph which needed one. */
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
 .mcrm .brand-mark svg { width: 17px; height: 17px; color: #2A1B04; }
-.mcrm .brand-mark img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; display: block; }
+.mcrm .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .mcrm .brand-btn {
   border: none; background: transparent; cursor: pointer; padding: 4px; border-radius: 10px;
   font-size: 21px; transition: transform .15s ease, background .15s ease;
@@ -275,9 +277,9 @@
 .mcrm .lead-side .blob.lb2 { width: 160px; height: 160px; bottom: -40px; left: -30px; background: radial-gradient(circle, #7EA8E8, transparent 70%); animation-delay: -7s; }
 @media (prefers-reduced-motion: reduce) { .mcrm .lead-side .blob { animation: none; } }
 .mcrm .lead-side-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
-.mcrm .lead-side .mark { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(155deg, var(--accent), var(--accent-dark)); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+.mcrm .lead-side .mark { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
 .mcrm .lead-side .mark svg { width: 19px; height: 19px; color: #2A1B04; }
-.mcrm .lead-side .mark img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; display: block; }
+.mcrm .lead-side .mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .mcrm .lead-side h3 { font-size: 25px; line-height: 1.22; margin: 0 0 12px; color: var(--panel-fg); text-wrap: balance; }
 .mcrm .lead-side p.sub { color: var(--panel-fg-soft); font-size: 13.5px; line-height: 1.6; margin: 0 0 26px; }
 .mcrm .lead-perks { display: flex; flex-direction: column; gap: 15px; margin-top: auto; }

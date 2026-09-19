@@ -41,7 +41,7 @@ export default function Nav() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <div className="brand-mark">
-            <img src="/logo.svg" alt="" />
+            <img src="/logo.png" alt="" />
           </div>
           Milliy CRM
         </button>
