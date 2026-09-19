@@ -1,4 +1,4 @@
-import { CONTACT_PHONE, CONTACT_PHONE_TEL, TELEGRAM_USERNAME } from "../config";
+import { CONTACT_PHONE, CONTACT_PHONE_TEL, LOGIN_URL, TELEGRAM_USERNAME } from "../config";
 import { useLeadModal } from "../context/LeadModalContext";
 
 export default function Footer() {
@@ -64,6 +64,9 @@ export default function Footer() {
         <div className="foot-bottom">
           <span>© 2026 Milliy CRM. Barcha huquqlar himoyalangan.</span>
           <span>Maxfiylik kelishuvi · Foydalanish shartlari</span>
+          <a className="btn btn-ghost" href={LOGIN_URL}>
+            Admin panelga kirish
+          </a>
         </div>
       </div>
     </footer>
