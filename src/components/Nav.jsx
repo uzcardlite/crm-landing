@@ -59,6 +59,9 @@ export default function Nav() {
         <a className="nav-login" href={LOGIN_URL}>
           Kirish
         </a>
+        <a className="btn btn-ghost nav-admin-btn" href={LOGIN_URL}>
+          Admin panelga kirish
+        </a>
         <a
           className="btn btn-dark"
           href="#cta"

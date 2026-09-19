@@ -134,6 +134,9 @@
 }
 .mcrm .icon-toggle svg { width: 16px; height: 16px; }
 .mcrm .nav-login { font-size: 14px; font-weight: 700; color: var(--ink-soft); text-decoration: none; white-space: nowrap; }
+/* Hidden below tablet width — "Kirish" + "Bepul sinash" already cover login
+   and signup on a narrow phone screen without crowding the header. */
+@media (max-width: 640px) { .mcrm .nav-admin-btn { display: none; } }
 .mcrm .btn {
   display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14.5px;
   border-radius: 999px; padding: 11px 21px; cursor: pointer; text-decoration: none; white-space: nowrap; border: none;
